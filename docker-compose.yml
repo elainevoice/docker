@@ -10,6 +10,7 @@ services:
         build: ./frontend
         environment:
           - NODE_ENV=development
+          - CHOKIDAR_USEPOLLING="true"
         ports:
           - 80:3000
         volumes:
