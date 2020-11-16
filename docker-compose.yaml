@@ -18,9 +18,18 @@ services:
           - /app/node_modules
         tty: true
         
-    backend:
-        build: ./scripts
-        ports:
-            - "8080:80"
-        volumes:
-            - ./scripts:/app
+    # backend:
+    #     build: ./scripts
+    #     ports:
+    #         - "8080:80"
+    #     volumes:
+    #         - ./scripts:/app
+
+    # jupyter:
+    #     build: "../Jupyter Notebook"
+    #     ports:
+    #       - 8888:8888
+    #     volumes:
+    #       - ./scripts:/root/jupyter
+    #     environment:
+    #       - PASSWORD=secret
