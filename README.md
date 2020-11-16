@@ -35,14 +35,20 @@ docker-compose up
 ### Development
 Here are some useful tools to help you while developing!
 
-##### Entering the docker container
+##### Finding the name of a container
 Run the following command to find containers
 ```console   
 docker container ls
 ```
 
+##### Entering the docker container
 After that use the following command to enter the container
 ```console   
 docker exec -it <CONTAINER_NAME> /bin/sh
 ```
 
+##### Installing a new package
+Enter the docker container.
+```console
+npm install <package>
+```
