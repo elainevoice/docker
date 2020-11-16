@@ -11,8 +11,14 @@ These instructions will get you a copy up and running on your local machine for 
 ### Installing
 A step by step series of examples that tell you how to get a development environment running.
 
-##### 1. Run Docker-Compose
-After cloning the repository, navigate to the proejct folder and run the following command: 
+##### 1. Update submodules
+After cloning the repository, navigate to the project folder and run the following command: 
+```console   
+git submodule update --init --recursive
+```
+
+##### 2. Run Docker-Compose
+Run the following command after cloning the submodules:
 ```console   
 docker-compose up --build
 ```
