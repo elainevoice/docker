@@ -1,0 +1,107 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <script> 
+    navigator.mediaDevices.getUserMedia({ audio: true }) 
+      .then(function (mediaStreamObj) { 
+  
+        let audio = document.querySelector('audio'); 
+   
+        if ("srcObject" in audio) { 
+          audio.srcObject = mediaStreamObj; 
+        } 
+        else {   // Old version 
+          audio.src = window.URL 
+            .createObjectURL(mediaStreamObj); 
+        } 
+
+        audio.onloadedmetadata = function (ev) { 
+          audio.play(); 
+        }; 
+  
+        // Start record 
+        let start = document.getElementById('btnStart'); 
+  
+        // Stop record 
+        let stop = document.getElementById('btnStop'); 
+  
+        // 2nd audio tag for play the audio 
+        let playAudio = document.getElementById('adioPlay'); 
+  
+        // This is the main thing to recorde  
+        // the audio 'MediaRecorder' API 
+        let mediaRecorder = new MediaRecorder(mediaStreamObj); 
+        // Pass the audio stream  
+  
+        // Start event 
+        start.addEventListener('click', function (ev) { 
+          mediaRecorder.start(); 
+          // console.log(mediaRecorder.state); 
+        }) 
+  
+        // Stop event 
+        stop.addEventListener('click', function (ev) { 
+          mediaRecorder.stop(); 
+          // console.log(mediaRecorder.state); 
+        }); 
+  
+        // If audio data available then push  
+        // it to the chunk array 
+        mediaRecorder.ondataavailable = function (ev) { 
+          dataArray.push(ev.data); 
+        } 
+  
+        // Chunk array to store the audio data  
+        let dataArray = []; 
+  
+        // Convert the audio data in to blob  
+        // after stopping the recording 
+        mediaRecorder.onstop = function (ev) { 
+  
+          // blob of type mp3 
+          let audioData = new Blob(dataArray,  
+                    { 'type': 'audio/mp3;' }); 
+            
+          // After fill up the chunk  
+          // array make it empty 
+          dataArray = []; 
+  
+          // Creating audio url with reference  
+          // of created blob named 'audioData' 
+          let audioSrc = window.URL 
+              .createObjectURL(audioData); 
+  
+          // Pass the audio url to the 2nd video tag 
+          playAudio.src = audioSrc; 
+        } 
+      }) 
+  
+      // If any error occurs then handles the error  
+      .catch(function (err) { 
+        console.log(err.name, err.message); 
+      }); 
+  </script> 
+</head> 
+  
+<body style="background-color:rgb(101, 185, 17); "> 
+  <header> 
+    <h1>Record and Play Audio in JavaScript</h1> 
+  </header> 
+  <!--button for 'start recording'--> 
+  <p> 
+    <button id="btnStart">START RECORDING</button> 
+                
+    <button id="btnStop">STOP RECORDING</button> 
+    <!--button for 'stop recording'--> 
+  </p> 
+  
+  <!--for record--> 
+  <audio controls></audio> 
+  <!--'controls' use for add  
+    play, pause, and volume--> 
+  
+  <!--for play the audio--> 
+  <audio id="adioPlay" controls></audio> 
+</body> 
+  
+</html> 
