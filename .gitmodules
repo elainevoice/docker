@@ -2,7 +2,6 @@
 	path = frontend
 	url = https://github.com/elainevoice/frontend.git
 	branch = master
-[submodule "scripts"]
-	path = scripts
-	url = https://github.com/elainevoice/scripts.git
-	branch = master
+[submodule "backend"]
+	path = backend
+	url = https://github.com/elainevoice/backend
