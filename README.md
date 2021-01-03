@@ -1,5 +1,5 @@
 # Using Docker Compose with Elaine Voice
-
+> All default configs are set for production/live, development-environment changes should be build upon the prod/live configs.
 ## Getting Started
 
 These instructions will get you a copy up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
