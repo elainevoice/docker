@@ -17,19 +17,36 @@ After cloning the repository, navigate to the project folder and run the followi
 git submodule update --init --recursive
 ```
 
-##### 2. Build the Docker Containers
-Run the following command after cloning the submodules:
-```console   
-docker-compose build
-```
-
 ### Deployment
 Once the containers have been installed, the project will be ready for deployment. 
+There are two deployment versions: local and production. The local build will provide a live-reloading node server, wherein the production server will build the application to a stand-alone html app.
 
-##### 1. Start the Docker Containers
+#### Local
+
+##### 1. Build the Docker Containers
+Run the following command after cloning the submodules:
+```console
+docker-compose -f docker-compose.yaml -f docker-compose.local.yaml build
+```
+
+##### 2. Start the Docker Containers
 Run the following command to start the containers
 ```console   
-docker-compose up
+docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up
+```
+
+#### Production
+
+##### 1. Build the Docker Containers
+Run the following command after cloning the submodules:
+```console
+docker-compose -f docker-compose.yaml -f docker-compose.production.yaml build
+```
+
+##### 2. Start the Docker Containers
+Run the following command to start the containers
+```console   
+docker-compose -f docker-compose.yaml -f docker-compose.production.yaml up
 ```
 
 ### Development

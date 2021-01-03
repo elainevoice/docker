@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+    frontend:
+        build: 
+          context: ./frontend
+          target: production_stage
+        environment:
+            - NODE_ENV=production
+        volumes:
+            - ./frontend:/app
+            - /app/node_modules
+        tty: true
+        expose:
+            - 3000
+        networks:
+            - frontend

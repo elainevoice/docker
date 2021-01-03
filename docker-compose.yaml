@@ -11,29 +11,24 @@ services:
             - backend
         tty: true
         networks:
-            - waag
+            - frontend
+            - backend
 
     frontend:
-        build: ./frontend
-        environment:
-            - NODE_ENV=development
-            - CHOKIDAR_USEPOLLING="true"
-        volumes:
-            - ./frontend:/app
-            - /app/node_modules
-        tty: true
-        expose:
-            - 3000
+        image: scratch
         networks:
-            - waag
+            - frontend
 
     backend:
-        build: ./backend
+        build: 
+            context: ./backend
+            target: production_stage
         volumes:
             - ./backend:/app
         expose:
             - 80
         networks:
-            - waag
+            - backend
 networks:
-    waag:
+    frontend:
+    backend:
