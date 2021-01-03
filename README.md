@@ -35,18 +35,18 @@ Run the following command to start the containers
 docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up
 ```
 
-#### Production
+#### Production/live
 
 ##### 1. Build the Docker Containers
 Run the following command after cloning the submodules:
 ```console
-docker-compose -f docker-compose.yaml -f docker-compose.production.yaml build
+docker-compose -f docker-compose.yaml -f docker-compose.live.yaml build
 ```
 
 ##### 2. Start the Docker Containers
 Run the following command to start the containers
 ```console   
-docker-compose -f docker-compose.yaml -f docker-compose.production.yaml up
+docker-compose -f docker-compose.yaml -f docker-compose.live.yaml up
 ```
 
 ### Development
