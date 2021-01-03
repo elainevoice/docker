@@ -1,16 +1,21 @@
 version: '3.8'
 services:
-    frontend:
+    proxy:
         build: 
           context: ./frontend
           target: production_stage
         environment:
             - NODE_ENV=production
         volumes:
-            - ./frontend:/app
-            - /app/node_modules
+            - ./configuration/nginx.conf:/etc/nginx/nginx.conf
         tty: true
-        expose:
-            - 3000
+        ports:
+            - 80:80
         networks:
             - frontend
+        environment: 
+            - REACT_APP_API=$API_ENDPOINT
+        depends_on: 
+            - backend
+networks:
+    frontend:

@@ -15,3 +15,16 @@ services:
             - 3000
         networks:
             - frontend
+        environment: 
+            - REACT_APP_API=$API_ENDPOINT
+    proxy:
+        networks:
+            - frontend
+        depends_on:
+            - frontend
+        volumes:
+            - ./configuration/nginx.local.conf:/etc/nginx/nginx.conf
+    backend:
+        command: "/start-reload.sh"
+networks:
+    frontend:
