@@ -1,5 +1,5 @@
 # Using Docker Compose with Elaine Voice
-
+> All default configs are set for production/live, development-environment changes should be build upon the prod/live configs.
 ## Getting Started
 
 These instructions will get you a copy up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -35,18 +35,18 @@ Run the following command to start the containers
 docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up
 ```
 
-#### Production
+#### Production/live
 
 ##### 1. Build the Docker Containers
 Run the following command after cloning the submodules:
 ```console
-docker-compose -f docker-compose.yaml -f docker-compose.production.yaml build
+docker-compose -f docker-compose.yaml -f docker-compose.live.yaml build
 ```
 
 ##### 2. Start the Docker Containers
 Run the following command to start the containers
 ```console   
-docker-compose -f docker-compose.yaml -f docker-compose.production.yaml up
+docker-compose -f docker-compose.yaml -f docker-compose.live.yaml up
 ```
 
 ### Development
