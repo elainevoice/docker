@@ -26,13 +26,13 @@ There are two deployment versions: local and production. The local build will pr
 ##### 1. Build the Docker Containers
 Run the following command after cloning the submodules:
 ```console
-docker-compose -f docker-compose.yaml -f docker-compose.local.yaml build
+docker-compose -f docker-compose.local.yaml build
 ```
 
 ##### 2. Start the Docker Containers
 Run the following command to start the containers
 ```console   
-docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up
+docker-compose -f docker-compose.local.yaml up
 ```
 
 #### Production/live
@@ -40,13 +40,13 @@ docker-compose -f docker-compose.yaml -f docker-compose.local.yaml up
 ##### 1. Build the Docker Containers
 Run the following command after cloning the submodules:
 ```console
-docker-compose -f docker-compose.yaml -f docker-compose.live.yaml build
+docker-compose build
 ```
 
 ##### 2. Start the Docker Containers
 Run the following command to start the containers
 ```console   
-docker-compose -f docker-compose.yaml -f docker-compose.live.yaml up
+docker-compose up
 ```
 
 ### Development
