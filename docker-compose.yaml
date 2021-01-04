@@ -16,8 +16,8 @@ services:
         volumes:
             - ./configuration/nginx.conf:/etc/nginx/nginx.conf
         tty: true
-        expose:
-            - 80
+        ports:
+            - 80:80
         depends_on:
             - backend
     backend:
