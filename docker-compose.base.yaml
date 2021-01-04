@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+    proxy:
+        image: nginx:alpine
+        volumes:
+            - ./configuration/nginx.conf:/etc/nginx/nginx.conf
+            - ./frontend/build:/usr/share/nginx/html
+        expose:
+            - 80
+        tty: true
+        networks:
+            - backend
+    backend:
+        container_name: backend
+        hostname: backend
+        build: 
+            context: ./backend
+            target: production_stage
+        volumes:
+            - ./backend:/app
+        expose:
+            - 80
+        networks:
+            - backend
+        command: "/start.sh"
+networks:
+    backend:

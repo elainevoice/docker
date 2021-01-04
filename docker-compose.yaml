@@ -1,28 +1,28 @@
 version: '3.8'
 services:
     proxy:
-        image: nginx:alpine
+        extends:
+            file: docker-compose.base.yaml
+            service: proxy
+        container_name: proxy_frontend
+        hostname: proxy_frontend
+        restart: unless-stopped
+        build: 
+          context: ./frontend
+          target: production_stage
+        environment:
+            - NODE_ENV=production
+            - REACT_APP_API={$API_ENDPOINT:-/api}
         volumes:
             - ./configuration/nginx.conf:/etc/nginx/nginx.conf
-            - ./frontend/build:/usr/share/nginx/html
-            # - ./frontend/build:/etc/nginx/html/
-        ports:
-            - 80:80
-        depends_on:
-            - backend
         tty: true
-        networks:
-            - backend
-    backend:
-        build: 
-            context: ./backend
-            target: production_stage
-        volumes:
-            - ./backend:/app
         expose:
             - 80
-        networks:
+        depends_on:
             - backend
-        command: "/start.sh"
+    backend:
+        extends:
+            file: docker-compose.base.yaml
+            service: backend
 networks:
     backend:

@@ -1,21 +1,31 @@
 version: '3.8'
 services:
     proxy:
+        extends:
+            file: docker-compose.base.yaml
+            service: proxy
+        container_name: proxy
+        hostname: proxy
         networks:
             - frontend
         depends_on:
             - frontend
+            - backend
         volumes:
             - ./configuration/nginx.local.conf:/etc/nginx/nginx.conf
-
+        ports:
+            - 80:80
     frontend:
+        container_name: frontend
+        hostname: frontend
+        restart: unless-stopped
         build: 
           context: ./frontend
           target: development_stage
         environment:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING="true"
-            - REACT_APP_API=$API_ENDPOINT
+            - REACT_APP_API={$API_ENDPOINT:-/api}
         volumes:
             - ./frontend:/app
             - /app/node_modules
@@ -24,8 +34,11 @@ services:
             - 3000
         networks:
             - frontend
-
     backend:
+        extends:
+            file: docker-compose.base.yaml
+            service: backend
         command: "/start-reload.sh"
 networks:
     frontend:
+    backend:
