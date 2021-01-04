@@ -25,7 +25,8 @@ services:
         environment:
             - NODE_ENV=development
             - CHOKIDAR_USEPOLLING="true"
-            - REACT_APP_API={$API_ENDPOINT:-/api}
+        env_file:
+            - .env
         volumes:
             - ./frontend:/app
             - /app/node_modules
